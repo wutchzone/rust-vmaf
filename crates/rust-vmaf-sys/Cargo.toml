@@ -2,8 +2,11 @@
 name = "rust-vmaf-sys"
 version = "0.1.0"
 edition = "2021"
-
-[dependencies]
+authors = ["Daniel Sedlak <daniel@sedlak.dev>"]
+license = "MIT"
+description = """
+Exported bindings for the libvmaf.
+"""
 
 [build-dependencies]
 bindgen = { version = "0.69.4" }
