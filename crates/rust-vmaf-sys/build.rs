@@ -43,11 +43,13 @@ fn main() {
     );
 
     let mut vmaf_include = vmaf_path.clone();
-    ["libvmaf", "include", "libvmaf"]
+    ["libvmaf", "include"]
         .into_iter()
         .for_each(|item| vmaf_include.push(item));
+    let bindings = Builder::default().clang_args(["-I", &vmaf_include.to_string_lossy()]);
+    vmaf_include.push("libvmaf");
 
-    let mut bindings = Builder::default().clang_args(["-I", &vmaf_include.to_string_lossy()]);
+    let mut bindings = bindings.clang_args(["-I", &vmaf_include.to_string_lossy()]);
     for header in VMAF_HEADERS {
         let mut tmp = vmaf_include.clone();
         tmp.push(header);
