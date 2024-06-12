@@ -1,0 +1,12 @@
+[package]
+name = "rust-vmaf"
+version = "0.1.0"
+edition = "2021"
+authors = ["Daniel Sedlak <daniel@sedlak.dev>"]
+license = "MIT"
+description = """
+Safe bindings to the libvmaf.
+"""
+
+[dependencies]
+rust-vmaf-sys = { path = "../rust-vmaf-sys" }
