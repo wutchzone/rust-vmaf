@@ -43,7 +43,7 @@ fn main() {
     vmaf_path.push("vmaf");
 
     git_fetch(
-        "git@github.com:Netflix/vmaf.git",
+        "https://github.com/Netflix/vmaf.git",
         "v3.0.0",
         &vmaf_path.to_string_lossy(),
     );
