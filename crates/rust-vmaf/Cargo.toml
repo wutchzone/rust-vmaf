@@ -8,5 +8,8 @@ description = """
 Safe bindings to the libvmaf.
 """
 
+[lints]
+workspace = true
+
 [dependencies]
 rust-vmaf-sys = { path = "../rust-vmaf-sys" }
