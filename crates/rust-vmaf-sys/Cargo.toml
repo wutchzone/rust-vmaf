@@ -8,5 +8,8 @@ description = """
 Exported bindings for the libvmaf.
 """
 
+[lints]
+workspace = true
+
 [build-dependencies]
 bindgen = { version = "0.69.4" }

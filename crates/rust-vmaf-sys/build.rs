@@ -1,3 +1,5 @@
+// REASON: It is not harmful to panic in the compile time with _reasonable_ error.
+#![allow(clippy::expect_used)]
 use std::{env, path::PathBuf, process::Command};
 
 use bindgen::Builder;
@@ -9,6 +11,8 @@ const VMAF_HEADERS: [&str; 5] = [
     "model.h",
     "picture.h",
 ];
+
+const VENV_NAME: &str = ".venv";
 
 fn git_fetch(repo: &str, branch: &str, output: &str) {
     #[rustfmt::skip]
@@ -29,7 +33,9 @@ fn git_fetch(repo: &str, branch: &str, output: &str) {
 }
 
 fn output() -> PathBuf {
-    PathBuf::from(env::var("OUT_DIR").unwrap())
+    PathBuf::from(
+        env::var("OUT_DIR").expect("Cannot fail because cargo sets this for the build script."),
+    )
 }
 
 fn main() {
@@ -57,12 +63,13 @@ fn main() {
     }
 
     bindings
+        .allowlist_function("vmaf_.*")
+        .allowlist_type("Vmaf.*")
         .generate()
         .expect("Unable to generate bindings.")
         .write_to_file(format!("{}/vmaf.rs", output().to_string_lossy()))
         .expect("Unable to write generated bindings.");
 
-    const VENV_NAME: &str = ".venv";
     assert!(Command::new("python3")
         .args(["-mvenv", VENV_NAME])
         .current_dir(&vmaf_path)

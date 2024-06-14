@@ -1,3 +1,20 @@
 [workspace]
 members = ["crates/*"]
 resolver = "2"
+
+[workspace.lints.clippy]
+as_conversions = "deny"
+expect_used = "deny"
+indexing_slicing = "deny"
+missing_errors_doc = "allow"
+module_inception = "allow"
+module_name_repetitions = "allow"
+panic = "deny"
+panic_in_result_fn = "deny"
+pedantic = { level = "deny", priority = -1 }
+string_slice = "deny"
+todo = "deny"
+unwrap_used = "deny"
+
+[workspace.lints.rustdoc]
+all = { level = "deny", priority = -1 }
