@@ -4,4 +4,11 @@ pub mod picture;
 #[cfg(test)]
 mod tests;
 
-pub use context::{ContextConfig, Initialize, PollMethod, Process, VmafContext};
+pub use context::{
+    ContextConfig,
+    Initialize,
+    PollMethod,
+    Process,
+    ScorePooledStatistics,
+    VmafContext,
+};

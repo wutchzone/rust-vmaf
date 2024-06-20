@@ -13,6 +13,14 @@ use super::VmafContext;
 use crate::{model::VmafModel, picture::Picture};
 
 #[derive(Copy, Clone, Debug)]
+pub struct ScorePooledStatistics {
+    pub min: f64,
+    pub max: f64,
+    pub mean: f64,
+    pub harmonic_mean: f64,
+}
+
+#[derive(Copy, Clone, Debug)]
 pub enum PollMethod {
     Min,
     Max,
@@ -86,5 +94,20 @@ impl VmafContext<Process> {
             0 => Ok(result),
             other => Err(Error::from_raw_os_error(other)),
         }
+    }
+
+    /// Calculates VMAF score for the registered model with given `picture_range`, if picture
+    /// range is `None`, then the VMAF score is calculated for all submitted pictures.
+    pub fn score_pooled_all(
+        &mut self,
+        model: &VmafModel,
+        picture_range: Option<Range<u32>>,
+    ) -> Result<ScorePooledStatistics, Error> {
+        Ok(ScorePooledStatistics {
+            min: self.score_pooled(model, PollMethod::Min, picture_range.clone())?,
+            max: self.score_pooled(model, PollMethod::Max, picture_range.clone())?,
+            mean: self.score_pooled(model, PollMethod::Mean, picture_range.clone())?,
+            harmonic_mean: self.score_pooled(model, PollMethod::HarmonicMean, picture_range)?,
+        })
     }
 }
