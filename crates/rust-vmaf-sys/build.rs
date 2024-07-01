@@ -85,7 +85,7 @@ fn main() {
         .expect("Unable to execute command.")
         .success());
     assert!(Command::new("make")
-        .args([VENV_NAME, "-j"])
+        .args([&format!("VENV={VENV_NAME}"), "-j"])
         .current_dir(&vmaf_path)
         .status()
         .expect("Unable to execute command.")
