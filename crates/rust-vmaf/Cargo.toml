@@ -1,6 +1,6 @@
 [package]
 name = "rust-vmaf"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors.workspace = true
 license.workspace = true
@@ -12,4 +12,4 @@ Safe bindings to the libvmaf.
 workspace = true
 
 [dependencies]
-rust-vmaf-sys = { path = "../rust-vmaf-sys", version = "0.1" }
+rust-vmaf-sys = { path = "../rust-vmaf-sys", version = "0.2" }
